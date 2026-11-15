@@ -1,5 +1,5 @@
-import type { Config } from './config.js';
-import type { GlassHomeDb } from './db.js';
+import type { Config } from './config';
+import type { GlassHomeDb } from './db';
 
 interface AccountRow {
   access_token: string;

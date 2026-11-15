@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp';
 import type { Database } from 'bun:sqlite';
 import { z } from 'zod';
 import {
@@ -12,7 +12,7 @@ import {
   slugify,
   type DashboardRow,
   type ToolContext,
-} from './common.js';
+} from './common';
 
 const getDashboardInput = z.object({
   dashboard: z.string().min(1).describe('Dashboard id (d_<uuid>) or slug.'),

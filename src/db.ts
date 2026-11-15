@@ -1,5 +1,5 @@
 import { Database } from 'bun:sqlite';
-import { databasePath, type Config } from './config.js';
+import { databasePath, type Config } from './config';
 
 /**
  * Lazily opening, WAL-mode connection to GlassHome's SQLite database

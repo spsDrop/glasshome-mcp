@@ -1,8 +1,8 @@
 import type { Database } from 'bun:sqlite';
 import { z } from 'zod';
-import type { Config } from '../config.js';
-import type { GlassHomeDb } from '../db.js';
-import type { HaClient } from '../ha.js';
+import type { Config } from '../config';
+import type { GlassHomeDb } from '../db';
+import type { HaClient } from '../ha';
 
 /** Everything tool groups need to do their work. */
 export interface ToolContext {

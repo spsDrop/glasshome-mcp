@@ -1,4 +1,4 @@
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp';
 import { z } from 'zod';
 import {
   errorResult,
@@ -6,7 +6,7 @@ import {
   handler,
   jsonResult,
   type ToolContext,
-} from './common.js';
+} from './common';
 import type { HassEntity, HassServiceTarget } from 'home-assistant-js-websocket';
 
 /** Compact per-entity view returned by the entity tools. */

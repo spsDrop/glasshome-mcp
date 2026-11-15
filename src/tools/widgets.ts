@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp';
 import type { Database } from 'bun:sqlite';
 import { z } from 'zod';
 import {
@@ -18,7 +18,7 @@ import {
   type PlacementSpec,
   type ToolContext,
   type WidgetInstanceRow,
-} from './common.js';
+} from './common';
 
 /** Parsed `installed_widgets.manifest_json` (only the fields the sidecar uses). */
 interface WidgetManifest {

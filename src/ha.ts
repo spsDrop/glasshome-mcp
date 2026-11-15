@@ -8,9 +8,9 @@ import {
   type HassEntity,
 } from 'home-assistant-js-websocket';
 import { getStates, callService } from 'home-assistant-js-websocket';
-import type { Config } from './config.js';
-import { HaAuth } from './auth.js';
-import type { GlassHomeDb } from './db.js';
+import type { Config } from './config';
+import { HaAuth } from './auth';
+import type { GlassHomeDb } from './db';
 
 /** Interval for the liveness watchdog (reconnect nudge + heartbeat probe). */
 const WATCHDOG_INTERVAL_MS = 30_000;

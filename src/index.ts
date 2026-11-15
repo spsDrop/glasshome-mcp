@@ -1,13 +1,13 @@
 import http from 'node:http';
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
-import { loadConfig } from './config.js';
-import { GlassHomeDb } from './db.js';
-import { HaClient } from './ha.js';
-import { registerDashboardTools } from './tools/dashboards.js';
-import { registerEntityTools } from './tools/entities.js';
-import { registerInstallTools } from './tools/install.js';
-import { registerWidgetTools } from './tools/widgets.js';
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp';
+import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp';
+import { loadConfig } from './config';
+import { GlassHomeDb } from './db';
+import { HaClient } from './ha';
+import { registerDashboardTools } from './tools/dashboards';
+import { registerEntityTools } from './tools/entities';
+import { registerInstallTools } from './tools/install';
+import { registerWidgetTools } from './tools/widgets';
 
 const SERVER_NAME = 'glasshome-mcp';
 const SERVER_VERSION = '0.1.0';
