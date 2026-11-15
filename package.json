@@ -1,0 +1,26 @@
+{
+  "name": "glasshome-mcp",
+  "version": "0.1.0",
+  "private": false,
+  "description": "MCP sidecar for GlassHome: Home Assistant control and dashboard editing over MCP Streamable HTTP",
+  "type": "module",
+  "engines": {
+    "bun": ">=1.0"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.0",
+    "home-assistant-js-websocket": "^9.8.1",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.0",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.6.0"
+  }
+}

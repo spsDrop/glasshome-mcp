@@ -1,0 +1,23 @@
+# Child image: GlassHome + MCP sidecar (runs in-container, no separate container)
+#
+# Build:
+#   cd ~/projects/glasshome-mcp
+#   docker build -f Dockerfile.child -t glasshome-mcp:latest .
+
+FROM ghcr.io/glasshome/dash:beta
+
+# --- Copy MCP server source (Bun runs TypeScript natively) ---
+COPY src/ /app/apps/mcp-server/src/
+COPY package.json /app/apps/mcp-server/
+
+# Install MCP deps (bun:sqlite is built into Bun, no native modules)
+RUN cd /app/apps/mcp-server && bun install --production
+
+# --- Patch /run.sh: start MCP before the main server execs ---
+COPY patch_run.sh.py /tmp/patch_run.py
+RUN apk add --no-cache python3 && \
+    python3 /tmp/patch_run.py && \
+    rm /tmp/patch_run.py && \
+    apk del python3
+
+EXPOSE 3900

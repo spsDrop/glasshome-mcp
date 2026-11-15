@@ -1,0 +1,29 @@
+# GlassHome MCP sidecar — runs INSIDE the GlassHome container (no separate container)
+#
+# 1. Build the image:
+#    ./setup.sh build
+#
+# 2. In your existing GlassHome compose file, modify the service:
+#    - change image to: glasshome-mcp:latest
+#    - add port "3900:3900"
+#
+# 3. Recreate:
+#    docker compose up -d glasshome
+#
+# The MCP server starts automatically on port 3900 (in-container background process).
+# No HA_TOKEN needed — the MCP reads HA URL + OAuth tokens from GlassHome's SQLite DB.
+# Set MCP_ENABLED=false in env to disable it without changing the image.
+
+# --- Modify the existing GlassHome service (NOT a new service) ---
+services:
+  glasshome:
+    image: glasshome-mcp:latest  # was: ghcr.io/glasshome/dash:beta
+    # ... keep all existing settings (container_name, restart, volumes, labels, etc.)
+    ports:
+      - "3123:3123"   # GlassHome UI (existing)
+      - "3900:3900"   # MCP sidecar (new)
+    environment:
+      # MCP controls (all optional)
+      - MCP_PORT=3900
+      - MCP_READONLY=false
+      # MCP_ENABLED=false  # uncomment to disable the MCP sidecar
