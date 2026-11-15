@@ -33,28 +33,17 @@ No separate `HA_TOKEN` env var needed. The MCP server reads HA URL + OAuth token
 
 ## Quick start
 
-### 1. Build the image
+### 1. Deploy
 
 ```bash
-cd glasshome-mcp
-./setup.sh build
+./setup.sh deploy your-host /path/to/compose.yaml
 ```
 
-### 2. Deploy to your GlassHome host
+Builds the image, transfers it, loads it, and recreates the GlassHome container. MCP is live at `http://your-host:3900/mcp`.
 
-```bash
-# Save + transfer
-./setup.sh save glasshome-mcp.tar.gz
-scp glasshome-mcp.tar.gz your-host:~/
+### 2. Update your compose file
 
-# Load + recreate on the host
-ssh your-host 'docker load < ~/glasshome-mcp.tar.gz &&
-  docker compose -f /path/to/compose.yaml up -d glasshome'
-```
-
-### 3. Update your compose file
-
-In your existing GlassHome service (the one running `ghcr.io/glasshome/dash:beta`):
+In your existing GlassHome service, point the image at `glasshome-mcp:latest` and add port `3900`:
 
 ```yaml
 services:
@@ -63,12 +52,13 @@ services:
     ports:
       - "3123:3123"               # GlassHome UI (existing)
       - "3900:3900"               # MCP sidecar (new)
-    # No HA_TOKEN needed — reads from GlassHome DB
 ```
 
-### 4. Connect your MCP client
+No `HA_TOKEN` needed — the MCP reads HA URL + OAuth tokens from GlassHome's SQLite DB automatically.
 
-Point any MCP client at `http://<host>:3900/mcp`. The server speaks MCP Streamable HTTP.
+### 3. Connect your MCP client
+
+Point any MCP client at `http://<host>:3900/mcp`. The server speaks [MCP Streamable HTTP](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports).
 
 ## Tools (20)
 
