@@ -15,24 +15,17 @@ Any MCP-compatible LLM client (Hermes Agent, Claude Desktop, etc.) can:
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────┐
-│  GlassHome container                        │
-│  ┌─────────────────┐  ┌──────────────────┐  │
-│  │  dash-server    │  │  glasshome-mcp   │  │
-│  │  (Bun, s6)     │  │  (Bun, :3900)   │  │
-│  │  port 3123     │  │  MCP Stream HTTP │  │
-│  └────────┬────────┘  └───────┬──────────┘  │
-│           │                    │              │
-│           └──────┬─────────────┘              │
-│                  │                            │
-│          /data/glasshome.sqlite               │
-│          /data/bundles/                       │
-└──────────────────┬────────────────────────────┘
-                   │
-         Home Assistant (HTTPS)
+GlassHome container (ghcr.io/glasshome/dash:beta)
+├── dash-server     :3123  (Bun, s6-supervised)
+├── glasshome-mcp   :3900  (Bun, MCP Streamable HTTP)
+├── /data/glasshome.sqlite
+└── /data/bundles/
+         │
+         ▼
+  Home Assistant (HTTPS)
 ```
 
-The MCP server is a child process started by `/run.sh` before the main dash-server execs. Both share the same SQLite DB and bundle directory.
+The MCP server is a child process started by `/run.sh` before the main dash-server execs. Both share the same SQLite DB and bundle directory — no volume sharing or sidecar containers.
 
 ## HA Auth
 
