@@ -14,10 +14,7 @@ COPY package.json /app/apps/mcp-server/
 RUN cd /app/apps/mcp-server && bun install --production
 
 # --- Patch /run.sh: start MCP before the main server execs ---
-COPY patch_run.sh.py /tmp/patch_run.py
-RUN apk add --no-cache python3 && \
-    python3 /tmp/patch_run.py && \
-    rm /tmp/patch_run.py && \
-    apk del python3
+COPY patch_run.sh /tmp/patch_run.sh
+RUN chmod +x /tmp/patch_run.sh && /tmp/patch_run.sh && rm /tmp/patch_run.sh
 
 EXPOSE 3900
